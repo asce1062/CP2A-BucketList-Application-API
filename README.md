@@ -14,7 +14,7 @@ Specifications for the API are shown below. You may use any database you prefer 
 
 
 EndPoint    |   Functionality
------------:|:---------------
+:-----------|:---------------
 `POST /auth/login`                          | Logs a user in
 `POST /auth/register`                       | Register a user
 `POST /bucketlists/`                        | Logs a user in
@@ -90,7 +90,7 @@ Ensure that your API is versioned as v1. See the material referenced above for m
 For this task, you are required to implement Token Based Authentication for the API such that some methods are not accessible via unauthenticated users. Access control mapping is listed below.
 
 EndPoint    |   Public Access
------------:|:---------------
+:-----------|:---------------
 `POST /auth/login`                          |   `TRUE`
 `POST /auth/register`                       |    `TRUE`
 `POST /bucketlists/`                        |   `FALSE`
