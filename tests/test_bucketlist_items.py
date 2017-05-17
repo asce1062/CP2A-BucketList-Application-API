@@ -41,7 +41,7 @@ class BucketListTestCase(BaseTestCase):
                                     headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
         self.assertTrue(data['error']
-                        == 'Bucketlist_id 1062 does not exists')
+                        == 'bucket_id 1062 does not exists')
 
     def test_update_bucketlist_item_non_existant_item_id(self):
         """ Test user updating a non-existsnt bucketlist item """
@@ -57,4 +57,4 @@ class BucketListTestCase(BaseTestCase):
                                     content_type='application/json',
                                     headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['error'] == 'bucket_id does not exists')
+        self.assertTrue(data['error'] == 'item_id does not exists')

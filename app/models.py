@@ -4,8 +4,16 @@
 import datetime
 import os
 
+# Add basic SQLAlchemy support to our app.
 from flask_sqlalchemy import SQLAlchemy
+
+# Suit for password hashing and generation routines.
+
 from passlib.apps import custom_app_context as pwd_context
+
+# A module that implements various functions to deal with unstrusted
+# sources. Mainly useful for web applications.
+
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, \
     BadSignature, SignatureExpired
 
@@ -68,19 +76,6 @@ class Users(db.Model):
             return None
         user = User.query.get(data['id'])
         return user
-
-    def __repr__(self):
-
-        # Print object in debugging.
-
-        return '<User {}>'.format(self.email)
-
-    @property
-    def id(self):
-
-        # Create and return property object of user_id
-
-        return self.user_id
 
 
 class Bucketlist(db.Model):

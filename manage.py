@@ -5,7 +5,7 @@
 
 import os
 
-  # class for handling a set of commands
+  # Controller class for handling a set of commands
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand

@@ -61,4 +61,4 @@ class BucketListTestCase(BaseTestCase):
                                     headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
         self.assertTrue(data['error']
-                        == 'bucketlist_name Asia already exists')
+                        == 'bucket_name Manga already exists')

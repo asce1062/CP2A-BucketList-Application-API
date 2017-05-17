@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from flask_api import FlaskAPI
+
+# Add basic SQLAlchemy support to our app.
 from flask_sqlalchemy import SQLAlchemy
 
 from instance.config import app_config
