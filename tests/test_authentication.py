@@ -30,4 +30,4 @@ class AuthTestCase(BaseTestCase):
         ))
         response = self.client.post(URL + 'register/', data=data,
                                     content_type='application/json')
-        self.assertIn(response.data.decode(), 'Registration successful')
+        self.assertIn(response.data.decode('utf-8'), 'Registration successful')
