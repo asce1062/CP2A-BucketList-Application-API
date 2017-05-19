@@ -26,6 +26,8 @@ manager.add_command('db', MigrateCommand)
 def create_db():
     """Creates database with tables"""
 
+    os.system('createdb flask_api')
+    os.system('createdb test_db')
     db.create_all()
     db.session.commit()
 
@@ -34,7 +36,8 @@ def create_db():
 def drop_db():
     """Deletes database"""
 
-    db.drop_all()
+    os.system('dropdb test_db')
+    os.system('dropdb flask_api')
 
 if __name__ == '__main__':
     manager.run()

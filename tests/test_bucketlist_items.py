@@ -53,8 +53,8 @@ class BucketListTestCase(BaseTestCase):
         url = '/api/v1.0/bucketlists/1/items/1062'
         new_bucketlist_item = \
             json.dumps(dict(bucket_name='Watch One Piece'))
-        response = self.client.post(url, data=new_bucketlist_item,
-                                    content_type='application/json',
-                                    headers=self.headers)
+        response = self.client.put(url, data=new_bucketlist_item,
+                                   content_type='application/json',
+                                   headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
         self.assertTrue(data['error'] == 'item_id does not exists')

@@ -16,25 +16,51 @@ class AuthTestCase(BaseTestCase):
     def test_login(self):
         """ Test user login """
 
-        data = json.dumps(dict(
-            email='tnkratos@gmail.com',
-            password='onepiece'
-        ))
-        response = self.client.post(URL + 'login/', data=data,
-                                    content_type='application/json')
-        self.assertTrue(response.status_code, 200)
+        data = {
+            'email': 'tnkratos@gmail.com',
+            'password': 'onepiece'
+        }
+        response = self.client.post(URL + 'login/', data=data)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertTrue(data['message'] == 'Login Successful')
 
-    def test_register(self):
-        """ Test user registration """
+    def test_login_no_email_provided(self):
+        """ Test user login and no email is provided """
 
-        data = json.dumps(dict(
-            username='asce1062',
-            first_name='Alex',
-            last_name='Ngugi',
-            email='tnkratos@gmail.com',
-            password='onepiece'
-        ))
-        response = self.client.post(URL + 'register/', data=data,
-                                    content_type='application/json')
-        self.assertIn(response.data.decode('utf-8'),
-                      'Registration successful')
+        data = {
+            'password': 'onepiece'
+        }
+        response = self.client.post(URL + 'login/', data=data)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('No email address provided', str(data['message']))
+
+    def test_register_user_already_exists(self):
+        """ Test user registration and user already exists """
+
+        data = {
+            'username': 'asce1062',
+            'first_name': 'Alex',
+            'last_name': 'Ngugi',
+            'email': 'tnkratos@gmail.com',
+            'password': 'onepiece'
+        }
+
+        self.client.post(URL + 'register/', data=data)
+        response = self.client.post(URL + 'register/', data=data)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn(str(data['message']), 'User already exists')
+
+    def test_register_user(self):
+        """ Test user registration new user """
+
+        data = {
+            'username': 'asce10622',
+            'first_name': 'Alexx',
+            'last_name': 'Ngugii',
+            'email': 'tnkratoss@gmail.com',
+            'password': 'onepiecee'
+        }
+
+        response = self.client.post(URL + 'register/', data=data)
+        self.assertTrue(str(response.data),
+                        'Registration successfull.')

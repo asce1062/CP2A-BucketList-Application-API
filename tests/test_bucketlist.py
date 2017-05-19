@@ -43,7 +43,7 @@ class BucketListTestCase(BaseTestCase):
     def test_get_bucketlists(self):
         """ Test user can get all bucketlists saved in the database """
 
-        new_bucketlist = json.dumps(dict(bucket_name='Kaizoku'))
+        new_bucketlist = json.dumps(dict(bucket_name='Game'))
         response = self.client.post(URL, data=new_bucketlist,
                                     content_type='application/json',
                                     headers=self.headers)

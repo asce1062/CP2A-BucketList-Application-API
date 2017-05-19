@@ -10,7 +10,7 @@ import json
 import unittest
 
 from app import create_app, db
-from app.models import Bucketlist, BucketItem, Users
+from app.models import Users
 
 
 class BaseTestCase(unittest.TestCase):
@@ -52,21 +52,24 @@ class BaseTestCase(unittest.TestCase):
         db.session.add(new_user)
         db.session.commit()
 
-        data = json.dumps(dict(
-            email='tnkratos@gmail.com',
-            password='onepiece'
-        ))
+        data = {
+            'email':'tnkratos@gmail.com',
+            'password':'onepiece'
+            }
 
-        response = self.client.post('/api/v1.0/auth/login/', data=data,
-                                    content_type='application/json')
+        response = self.client.post('/api/v1.0/auth/login/', data=data)
 
         # Convert response to string and string to dict.
 
-        data = json.loads(response.data.decode('utf-8'))
+        data = json.loads(response.data.decode())
 
         # Authentication token is the string with 'auth_token' key.
 
         auth_token = data['auth_token']
+
+        # 'Authorization' : Set authorization type.
+        # 'Accept' : Add ability to accept a JSON encoded entity from the request body.
+        # 'Content-Type' : Designates the content to be in a specific format.
 
         self.headers = {'Authorization': 'Token' + auth_token,
                         'Content-Type': 'application/json',
