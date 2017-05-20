@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Blueprint : Keep a record of functions that will be called with a class.
 
@@ -25,11 +27,12 @@ user_fields = {
     'first_name': fields.String,
     'last_name': fields.String,
     'email': fields.String,
-    'password_hash': fields.String
+    'password_hash': fields.String,
 }
 
 
 class LoginAPI(Resource):
+
     """ Create endpoints for LoginAPI """
 
     def __init__(self):
@@ -38,13 +41,13 @@ class LoginAPI(Resource):
             'email',
             type=str,
             required=True,
-            help='No email address provided',
+            help='No email address provided'
         )
         self.reqparse.add_argument(
             'password',
             type=str,
             required=True,
-            help='No password provided',
+            help='No password provided'
         )
         super(LoginAPI, self).__init__()
 
@@ -65,28 +68,30 @@ class LoginAPI(Resource):
                         'message': 'Login Successful',
                         'auth_token': give_token.decode('utf-8')
                     }
-                    return json_response, 200
-
+                    return (json_response, 200)
                 else:
+
                     json_response = {
                         'error': 'Invalid password'
                     }
-                    return json_response, 401
-
+                    return (json_response, 401)
             else:
-                json_response = {
-                    'error': 'User with email {} does not exist.' .format(args['email'])
-                }
-                return json_response, 404
 
+                json_response = \
+                    {
+                        'error': 'User with email {} does not exist.'.format(args['email'])
+                    }
+                return (json_response, 404)
         except:
+
             json_response = {
                 'error': 'Login Failed'
             }
-            return json_response, 500
+            return (json_response, 500)
 
 
 class RegisterAPI(Resource):
+
     """ Create endpoints for RegisterAPI """
 
     def __init__(self):
@@ -153,17 +158,27 @@ class RegisterAPI(Resource):
                 json_response = {
                     'message': 'Registration successfull.'
                 }
-                return json_response, 201
+                return (json_response, 201)
             except:
-                json_response = {
-                    'message': 'Unable to register new user {} .' .format(args['username'])
-                }
-                return json_response, 400
+                json_response = \
+                    {
+                        'message': 'Unable to register new user {} .'.format(args['username'])
+                    }
+                return (json_response, 400)
         else:
             json_response = {
                 'message': 'User already exists'
             }
-            return json_response, 409
+            return (json_response, 409)
 
-auth_api.add_resource(LoginAPI, '/api/v1.0/auth/login/', endpoint='login')
-auth_api.add_resource(RegisterAPI, '/api/v1.0/auth/register/', endpoint='register')
+
+auth_api.add_resource(
+    LoginAPI,
+    '/api/v1.0/auth/login/',
+    endpoint='login'
+)
+auth_api.add_resource(
+    RegisterAPI,
+    '/api/v1.0/auth/register/',
+    endpoint='register'
+)
