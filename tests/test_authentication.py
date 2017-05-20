@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import json
 
 # from test_base import BucketlistTestCase
@@ -44,7 +45,9 @@ class AuthTestCase(BaseTestCase):
         }
         response = self.client.post(URL + 'login/', data=data)
         data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['error'] == 'User with email kratostn@gmail.com does not exist.')
+        self.assertTrue(
+            data['error'] == 'User with email kratostn@gmail.com does not exist.'
+        )
 
     def test_login_no_email_provided(self):
         """ Test user login and no email is provided """
@@ -74,7 +77,7 @@ class AuthTestCase(BaseTestCase):
             'first_name': 'Alexx',
             'last_name': 'Ngugii',
             'email': 'tnkratoss@gmail.com',
-            'password': 'onepiecee'
+            'password': 'onepiecee',
         }
 
         response = self.client.post(URL + 'register/', data=data)
@@ -88,7 +91,7 @@ class AuthTestCase(BaseTestCase):
             'first_name': 'Alexx',
             'last_name': 'Ngugii',
             'email': 'tnkratoss@gmail.com',
-            'password': 'onepiecee'
+            'password': 'onepiecee',
         }
 
         response = self.client.post(URL + 'register/', data=data)
@@ -102,7 +105,7 @@ class AuthTestCase(BaseTestCase):
             'username': 'asce10622',
             'last_name': 'Ngugii',
             'email': 'tnkratoss@gmail.com',
-            'password': 'onepiecee'
+            'password': 'onepiecee',
         }
 
         response = self.client.post(URL + 'register/', data=data)
@@ -116,7 +119,7 @@ class AuthTestCase(BaseTestCase):
             'username': 'asce10622',
             'first_name': 'Alexx',
             'email': 'tnkratoss@gmail.com',
-            'password': 'onepiecee'
+            'password': 'onepiecee',
         }
 
         response = self.client.post(URL + 'register/', data=data)
@@ -131,7 +134,7 @@ class AuthTestCase(BaseTestCase):
             'first_name': 'Alexx',
             'last_name': 'Ngugii',
             'email': 'tnkratoss.com@gmail',
-            'password': 'onepiecee'
+            'password': 'onepiecee',
         }
 
         response = self.client.post(URL + 'register/', data=data)
@@ -160,7 +163,7 @@ class AuthTestCase(BaseTestCase):
             'first_name': 'Alex',
             'last_name': 'Ngugi',
             'email': 'tnkratos@gmail.com',
-            'password': 'onepiece'
+            'password': 'onepiece',
         }
 
         self.client.post(URL + 'register/', data=data)

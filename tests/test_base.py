@@ -53,15 +53,15 @@ class BaseTestCase(unittest.TestCase):
         db.session.commit()
 
         data = {
-            'email':'tnkratos@gmail.com',
-            'password':'onepiece'
-            }
+            'email': 'tnkratos@gmail.com',
+            'password': 'onepiece'
+        }
 
         response = self.client.post('/api/v1.0/auth/login/', data=data)
 
         # Convert response to string and string to dict.
 
-        data = json.loads(response.data.decode())
+        data = json.loads(response.data.decode('utf-8'))
 
         # Authentication token is the string with 'auth_token' key.
 
@@ -71,9 +71,9 @@ class BaseTestCase(unittest.TestCase):
         # 'Accept' : Add ability to accept a JSON encoded entity from the request body.
         # 'Content-Type' : Designates the content to be in a specific format.
 
-        self.headers = {'Authorization': 'Token' + auth_token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'}
+        self.headers = {
+            'Authorization': 'Token ' + auth_token
+        }
 
     def tearDown(self):
         """ Clear resources after tests are run """
