@@ -24,6 +24,8 @@ def create_app(config_name):
     from app.user import user_blueprint
     app.register_blueprint(user_blueprint)
 
+    from app.bucket_list import blueprint
+    app.register_blueprint(blueprint)
     # connect to the db
 
     db.init_app(app)
