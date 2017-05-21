@@ -68,8 +68,7 @@ class BaseTestCase(unittest.TestCase):
         auth_token = data['auth_token']
 
         # 'Authorization' : Set authorization type.
-        # 'Accept' : Add ability to accept a JSON encoded entity from the request body.
-        # 'Content-Type' : Designates the content to be in a specific format.
+        # 'Token ' : Exactly one space required after the prefix token.
 
         self.headers = {
             'Authorization': 'Token ' + auth_token

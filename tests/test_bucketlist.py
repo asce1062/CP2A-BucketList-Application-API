@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import json
 
 # from test_base import BucketlistTestCase
@@ -13,15 +14,14 @@ class BucketListTestCase(BaseTestCase):
 
     """Tests various endpoints to a bucketlist """
 
-    def test_create_bucketlist(self):
-        """ Test user can create bucketlist """
+    def test_create_bucketlist_no_bucketlis_name(self):
+        """ Test create bucketlist and no bucketlist name provided """
 
-        data = {
-            'bucketlist_name': 'Watch Anime'
-        }
-        response = self.client.post(URL, data=data, headers=self.headers)
+        data = {}
+        response = self.client.post(URL, data=data,
+                                    headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['message'] == 'New bucketlist created successfully')
+        self.assertIn('No bucketlist name provided', str(data['message']))
 
     def test_create_bucketlist_duplicate(self):
         """ Test user cannot create an existing bucketlist """
@@ -30,46 +30,144 @@ class BucketListTestCase(BaseTestCase):
             'bucketlist_name': 'Watch Anime'
         }
         self.client.post(URL, data=data, headers=self.headers)
-        response = self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.post(URL, data=data,
+                                    headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['error'] == 'bucketlist_name Watch Anime already exists')
+        self.assertTrue(data['error']
+                        == 'bucketlist_name Watch Anime already exists')
 
-    # def test_get_bucketlist(self):
-    #     """ Test user can get bucketlist """
+    def test_create_bucketlist(self):
+        """ Test user can create bucketlist """
 
-    #     response = self.client.get(
-    #         URL, content_type='application/json', headers=self.headers)
-    #     self.assertEqual(response.status_code, 200)
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        response = self.client.post(URL, data=data,
+                                    headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertTrue(data['message']
+                        == 'New bucketlist created successfully')
 
-    # def test_update_bucketlist(self):
-    #     """ Test user can update bucketlist """
+    def test_get_bucketlist(self):
+        """ Test user can get bucketlist """
 
-    #     edit_bucketlist = json.dumps(dict(bucket_name='Game'))
-    #     url = '/api/v1.0/bucketlists/1/'
-    #     response = self.client.put(url, data=edit_bucketlist,
-    #                                content_type='application/json',
-    #                                headers=self.headers)
-    #     self.assertEqual(response.status_code, 200)
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.get(URL, headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('Watch Anime', str(data['bucketlists']))
 
-    # def test_get_bucketlists(self):
-    #     """ Test user can get all bucketlists saved in the database """
+    def test_get_bucketlist_by_id(self):
+        """ Test user can get bucketlist by bucketlist ID """
 
-    #     new_bucketlist = json.dumps(dict(bucket_name='Game'))
-    #     response = self.client.post(URL, data=new_bucketlist,
-    #                                 content_type='application/json',
-    #                                 headers=self.headers)
-    #     self.assertEqual(response.status_code, 200)
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.get(URL + '1/', headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn(str(data['bucket_name']), 'Watch Anime')
 
-    # def test_duplicate_bucketlist(self):
-    #     """ Test endpoint behavior on creation of duplicate bucketlist """
+    def test_get_bucketlist_by_query(self):
+        """ Test user can get bucketlist by query """
 
-    #     new_bucketlist = json.dumps(dict(bucket_name='Manga'))
-    #     self.client.post(URL, data=new_bucketlist,
-    #                      content_type='application/json',
-    #                      headers=self.headers)
-    #     response = self.client.post(URL, data=new_bucketlist,
-    #                                 content_type='application/json',
-    #                                 headers=self.headers)
-    #     data = json.loads(response.data.decode('utf-8'))
-    #     self.assertTrue(data['error']
-    #                     == 'bucket_name Manga already exists')
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        query = data['bucketlist_name']
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.get(URL + '?q=' + query,
+                                   headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('Watch Anime', str(data['bucketlists']))
+
+    def test_get_bucketlist_limit_results(self):
+        """ Test user can limit bucketlists output"""
+
+        data_1 = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data_1, headers=self.headers)
+        data = {
+            'bucketlist_name': 'Watch Animee'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.get(URL + '?limit=1',
+                                   headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('http://localhost' + URL + '?page=2&limit=1',
+                      str(data['message']))
+        self.assertIn('2', str(data['message']))
+
+    def test_get_bucketlist_limit_results_has_previous_page(self):
+        """ Test user can navigate through pages on limited output """
+
+        data_1 = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data_1, headers=self.headers)
+        data = {
+            'bucketlist_name': 'Watch Animee'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.get(URL + '?page=2&limit=1',
+                                   headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('http://localhost' + URL + '?page=1&limit=1',
+                      str(data['message']))
+        self.assertIn('2', str(data['message']))
+
+    def test_update_bucketlist(self):
+        """ Test user can update bucketlist """
+
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        edit_data = {
+            'bucketlist_name': 'Watch Animee'
+        }
+        response = self.client.put(URL + '1/', data=edit_data,
+                                   headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('Update was successfull', str(data['message']))
+
+    def test_update_bucketlist_non_existant(self):
+        """ Test user cannot update a non existant bucketlist """
+
+        edit_data = {
+            'bucketlist_name': 'Watch Animee'
+        }
+        response = self.client.put(URL + '1/', data=edit_data,
+                                   headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn(str(data['error']),
+                      'bucketlist with id 1 does not exists')
+
+    def test_delete_bucketlist(self):
+        """ Test user can delete bucketlist """
+
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.delete(URL + '1/', data=data,
+                                      headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn(str(data['message']),
+                      'bucketlist with id 1 has been deleted')
+
+    def test_delete_bucketlist_non_existant(self):
+        """ Test user cannot delete a non existant bucketlist """
+
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        response = self.client.delete(URL + '2/', data=data,
+                                      headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn(str(data['error']),
+                      'bucketlist with id 2 does not exists')
