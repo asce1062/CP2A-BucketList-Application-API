@@ -14,47 +14,40 @@ class BucketListTestCase(BaseTestCase):
 
     """This class represents the bucketlist(s) item(s) test cases"""
 
+    def test_create_bucketlist_item_no_item_name(self):
+        """ Test create bucketlist item and no item name provided """
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        item_data = {}
+        response = self.client.post(URL + '1/items/', data=item_data,
+                                    headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn('No item name provided', str(data['message']))
+
+    def test_create_bucketlist_item_non_existant_bucketlist(self):
+        """ Test create bucketlist item and bucket list does not exist """
+        item_data = {
+            'item_name': 'One Piece',
+            'done': 'False'
+        }
+        response = self.client.post(URL + '2/items/', data=item_data,
+                                    headers=self.headers)
+        data = json.loads(response.data.decode('utf-8'))
+        self.assertIn(str(data['error']), 'Bucketlist id 2 does not exists')
+
     def test_create_bucketlist_item(self):
-        """ Test user can create bucketlist item """
-
-        new_bucketlist = json.dumps(dict(bucket_name='Anime'))
-        self.client.post(URL, data=new_bucketlist,
-                         content_type='application/json',
-                         headers=self.headers)
-        new_bucketlist_item = \
-            json.dumps(dict(bucket_name='Watch One Piece'))
-        url = '/api/v1.0/bucketlists/1/items/'
-        response = self.client.post(url, data=new_bucketlist_item,
-                                    content_type='application/json',
+        """ Test create bucketlist item """
+        data = {
+            'bucketlist_name': 'Watch Anime'
+        }
+        self.client.post(URL, data=data, headers=self.headers)
+        item_data = {
+            'item_name': 'One Piece',
+            'done': 'False'
+        }
+        response = self.client.post(URL + '1/items/', data=item_data,
                                     headers=self.headers)
         data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['bucket_name'] == 'Watch One Piece')
-
-    def test_create_bucketlist_item_non_existant_bucketlist_id(self):
-        """ Test user creates a bucketlist item for a non-existant bucketlist """
-
-        url = '/api/v1.0/bucketlists/1062/items/'
-        new_bucketlist_item = \
-            json.dumps(dict(bucket_name='Watch One Piece'))
-        response = self.client.post(url, data=new_bucketlist_item,
-                                    content_type='application/json',
-                                    headers=self.headers)
-        data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['error']
-                        == 'bucket_id 1062 does not exists')
-
-    def test_update_bucketlist_item_non_existant_item_id(self):
-        """ Test user updating a non-existsnt bucketlist item """
-
-        new_bucketlist = json.dumps(dict(bucket_name='Anime'))
-        self.client.post(URL, data=new_bucketlist,
-                         content_type='application/json',
-                         headers=self.headers)
-        url = '/api/v1.0/bucketlists/1/items/1062'
-        new_bucketlist_item = \
-            json.dumps(dict(bucket_name='Watch One Piece'))
-        response = self.client.put(url, data=new_bucketlist_item,
-                                   content_type='application/json',
-                                   headers=self.headers)
-        data = json.loads(response.data.decode('utf-8'))
-        self.assertTrue(data['error'] == 'item_id does not exists')
+        self.assertIn('New bucketlist item created successfully', str(data['message']))

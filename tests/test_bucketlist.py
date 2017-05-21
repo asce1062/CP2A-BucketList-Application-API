@@ -14,7 +14,7 @@ class BucketListTestCase(BaseTestCase):
 
     """Tests various endpoints to a bucketlist """
 
-    def test_create_bucketlist_no_bucketlis_name(self):
+    def test_create_bucketlist_no_bucketlist_name(self):
         """ Test create bucketlist and no bucketlist name provided """
 
         data = {}

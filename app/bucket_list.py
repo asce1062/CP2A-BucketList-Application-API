@@ -225,80 +225,80 @@ class BucketItemAPI(Resource):
         self.reqparse.add_argument(
             'item_name',
             type=str,
+            required=True,
             help='No item name provided'
         )
         self.reqparse.add_argument('done', default=False, type=bool)
         super(BucketItemAPI, self).__init__()
 
-        def get(self, itemid=None):
-            """ Fetch all created items """
+    def get(self, bucketlist_id, item_id=None):
+        """ Fetch all created items """
 
-            if itemid:
-                this_item = \
-                    BucketItem.query.filter_by(item_id=itemid).first()
-                return (marshal(this_item, bucket_item_fields), 200)
+        if item_id:
+            this_item = \
+                BucketItem.query.filter_by(item_id=item_id).first()
+            return (marshal(this_item, bucket_item_fields), 200)
+        else:
+            self.reqparse = reqparse.RequestParser()
+            self.reqparse.add_argument(
+                'q',
+                type=str,
+                location='args'
+            )
+            self.reqparse.add_argument(
+                'limit',
+                type=int,
+                location='args',
+                default=20
+            )
+            self.reqparse.add_argument(
+                'page',
+                type=int,
+                location='args',
+                default=1)
+            args = self.reqparse.parse_args()
+            query = args['q']
+            limit = args['limit']
+            page = args['page']
+            if query:
+                items = \
+                    BucketItem.query.filter(
+                        BucketItem.item_name.like(
+                            '%' + query + '%')).paginate(page, limit, False)
             else:
-                self.reqparse = reqparse.RequestParser()
-                self.reqparse.add_argument(
-                    'q',
-                    type=str,
-                    location='args'
-                )
-                self.reqparse.add_argument(
-                    'limit',
-                    type=int,
-                    location='args',
-                    default=20
-                )
-                self.reqparse.add_argument(
-                    'page',
-                    type=int,
-                    location='args',
-                    default=1)
-                args = self.reqparse.parse_args()
-                query = args['q']
-                limit = args['limit']
-                page = args['page']
-                if query:
-                    items = \
-                        BucketItem.query.filter(
-                            BucketItem.item_name.like(
-                                '%' + query + '%')).paginate(page, limit, False)
-                else:
-                    items = BucketItem.query.filter().paginate(page,
-                                                               limit, False)
-                if not items:
-                    return (
-                        {
-                            'message': 'items not found'
-                        }, 400
-                    )
-                if items.has_prev:
-                    prev_page = request.url_root \
-                        + 'api/v1.0/bucketlists/items/' + '?page=' \
-                        + str(page - 1) + '&limit=' + str(limit)
-                else:
-                    prev_page = 'None'
-                if items.has_next:
-                    next_page = request.url_root \
-                        + 'api/v1.0/bucketlists/items/' + '?page=' \
-                        + str(page + 1) + '&limit=' + str(limit)
-                else:
-                    next_page = 'None'
+                items = BucketItem.query.filter().paginate(page, limit, False)
+            if not items:
                 return (
                     {
-                        'message':
-                        {
-                            'next_page': next_page,
-                            'prev_page': prev_page,
-                            'total_pages': items.pages
-                        },
-                        'items': marshal(
-                            items.items,
-                            bucket_item_fields
-                        )
-                    }, 200
+                        'message': 'items not found'
+                    }, 400
                 )
+            if items.has_prev:
+                prev_page = request.url_root \
+                    + 'api/v1.0/bucketlists/items/' + '?page=' \
+                    + str(page - 1) + '&limit=' + str(limit)
+            else:
+                prev_page = 'None'
+            if items.has_next:
+                next_page = request.url_root \
+                    + 'api/v1.0/bucketlists/items/' + '?page=' \
+                    + str(page + 1) + '&limit=' + str(limit)
+            else:
+                next_page = 'None'
+            return (
+                {
+                    'message':
+                    {
+                        'next_page': next_page,
+                        'prev_page': prev_page,
+                        'total_pages': items.pages
+                    },
+                    'items': marshal(
+                        items.items,
+                        bucket_item_fields
+                    )
+                }, 200
+            )
 
     def post(self, bucketlist_id):
         """ Create a new item in bucket list based on the bucketlist_id """
