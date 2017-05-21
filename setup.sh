@@ -40,12 +40,3 @@ tput setaf 3
 
 tput setaf 2
 	time source .env
-
-tput setaf 3
-	echo  
-	echo Activating virtual environment...
-	echo  
-	sleep 3
-
-tput setaf 2
-    time workon bucket
