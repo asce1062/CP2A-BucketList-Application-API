@@ -1,0 +1,173 @@
+#!/bin/bash
+############################################################################
+#
+# Copyright (c) 2017 - asce1062 (alex.mbugua@andela.com)
+#
+# This script file is intended for personal and/or educational use only.  
+# It may not be duplicated for monetary benefit or 
+# any other purpose without the permission of the developer.
+#
+############################################################################
+# Specify colors utilized in the terminal
+normal='tput sgr0'              # White
+red='tput setaf 1'              # Red
+green='tput setaf 2'            # Green
+yellow='tput setaf 3'           # Yellow
+blue='tput setaf 4'             # Blue
+violet='tput setaf 5'           # Violet
+cyan='tput setaf 6'             # Cyan
+white='tput setaf 7'            # White
+txtbld=$(tput bold)             # Bold
+bldred=${txtbld}$(tput setaf 1) # Bold Red
+bldgrn=${txtbld}$(tput setaf 2) # Bold Green
+bldblu=${txtbld}$(tput setaf 4) # Bold Blue
+bldylw=${txtbld}$(tput setaf 3) # Bold Yellow
+bldvlt=${txtbld}$(tput setaf 5) # Bold Violet
+bldcya=${txtbld}$(tput setaf 6) # Bold Cyan
+bldwht=${txtbld}$(tput setaf 7) # Bold White
+
+version=1.0
+
+while :
+        do
+
+        clear
+        echo "${bldred}██████╗ ██╗   ██╗ ██████╗██╗  ██╗███████╗████████╗██╗     ██╗███████╗████████╗     █████╗ ██████╗ ██╗"
+        echo "${bldred}██╔══██╗██║   ██║██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██║     ██║██╔════╝╚══██╔══╝    ██╔══██╗██╔══██╗██║"
+        echo "${bldred}██████╔╝██║   ██║██║     █████╔╝ █████╗     ██║   ██║     ██║███████╗   ██║       ███████║██████╔╝██║"
+        echo "${bldred}██╔══██╗██║   ██║██║     ██╔═██╗ ██╔══╝     ██║   ██║     ██║╚════██║   ██║       ██╔══██║██╔═══╝ ██║"
+        echo "${bldred}██████╔╝╚██████╔╝╚██████╗██║  ██╗███████╗   ██║   ███████╗██║███████║   ██║       ██║  ██║██║     ██║"
+        echo "${bldred}╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚══════╝   ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝"
+        echo "${bldred}║                                                                                                   ║"
+        echo "${bldred}║                               ${bldcya}CP2A - BucketList Application API${bldred}                                   ║"
+        echo "${bldred}║                                                                                                   ║"
+        echo "${bldred}║                                      ${bldcya}R E S T f u l A P I${bldred}                                          ║"
+        echo "${bldred}║                                                                                                   ║"
+        echo "${bldred}║                                                                                                   ║"
+        echo "${bldred}╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"
+        echo "${bldred}║                ${bldcya}CP2A - BucketList Application API $version - by asce1062 ${bldblu}(andela.com)${bldred}                   ║"
+        echo "${bldred}╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"
+        echo 
+        echo "${bldblu}> MAIN MENU"
+        echo
+        echo "  1 - Install requirements from file."
+        echo "  2 - Activate environmental variables."
+        echo "  3 - Create Databases (Postgres)."
+        echo "  4 - Make clean migrations."
+        echo "  5 - Update migrations."
+        echo "  6 - Run Server"
+        echo "  7 - Check for updates."
+        echo 
+        echo "  0 - Run tests."
+        echo " 00 - Run tests (with coverage)"
+        echo " 99 - Run tests (with coverage generate HTML) "
+        echo
+        echo "  u - Info"
+        echo "  x - Exit"
+        echo
+        echo 
+        echo -n "${bldwht}(bucket) ${bldred}❯  "
+        read opt
+
+        if [ "$?" != "1" ]
+        then
+        case $opt in
+        1)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Installing requirements from requirements.txt...
+                echo  
+                sleep 3
+        tput setaf 2
+                time pip install -r requirements.txt;continue;;
+
+        2)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Activating environmental variables from .env...
+                echo  
+                sleep 3
+        tput setaf 2
+                time source .env; continue;;
+
+        3)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Creating databases flask_api and test_db...
+                echo  
+                sleep 3
+        tput setaf 2
+                time dropdb flask_api; time createdb flask_api; time dropdb test_db; time createdb test_db;continue;;
+        4)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Making Clean Migrations...
+                echo  
+                sleep 3
+        tput setaf 2
+                time rm -rf migrations; time python manage.py db init; time python manage.py db migrate; time python manage.py db upgrade;continue;;
+        5)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Updating Migrations...
+                echo  
+                sleep 3
+        tput setaf 2
+                time python manage.py db migrate; time python manage.py db upgrade;continue;;
+        6)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Running the server on a new tab...
+                echo  
+                sleep 3
+        tput setaf 2
+                time osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down' -e 'tell application "System Events" to tell process "Terminal" to keystroke "workon bucket"' -e 'tell application "System Events" to tell process "iTerm" to key code 52' -e 'tell application "System Events" to tell process "Terminal" to keystroke "source .env"' -e 'tell application "System Events" to tell process "iTerm" to key code 52' -e 'tell application "System Events" to tell process "Terminal" to keystroke "python run.py"' -e 'tell application "System Events" to tell process "iTerm" to key code 52'&& sleep 2;continue;;
+        7)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Checking for updates...
+                echo  
+                sleep 3
+        tput setaf 2
+                clear; time git pull;continue;;
+        0) 
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Running tests for application version $version...
+                echo  
+                sleep 3
+        tput setaf 2
+                clear; time nosetests -v;continue;;
+        00)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Running tests with coverage for application version $version...
+                echo  
+                sleep 3
+        tput setaf 2
+                clear; time nosetests -v --with-coverage --cover-erase;continue;;
+        99)
+        tput setaf 3
+                sleep 1
+                echo  
+                echo Running tests with coverage and generate cover HTML for application version $version...
+                echo  
+                sleep 3
+        tput setaf 2
+                clear; time nosetests -v --with-coverage --cover-erase --cover-html;continue;;
+        u) ./about $version; continue;;
+        x) clear; echo; echo "Goodbye."; echo; exit 1;;
+        *) echo "Invalid option"; continue;;
+        esac
+        fi
+
+done

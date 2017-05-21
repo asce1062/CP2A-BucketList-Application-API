@@ -1,0 +1,50 @@
+############################################################################
+#
+# Copyright (c) 2017 - asce1062 (alex.mbugua@andela.com)
+#
+# This script file is intended for personal and/or educational use only.  
+# It may not be duplicated for monetary benefit or 
+# any other purpose without the permission of the developer.
+#
+############################################################################
+normal='tput sgr0'              # White
+red='tput setaf 1'              # Red
+green='tput setaf 2'            # Green
+yellow='tput setaf 3'           # Yellow
+blue='tput setaf 4'             # Blue
+violet='tput setaf 5'           # Violet
+cyan='tput setaf 6'             # Cyan
+white='tput setaf 7'            # White
+txtbld=$(tput bold)             # Bold
+bldred=${txtbld}$(tput setaf 1) # Bold Red
+bldgrn=${txtbld}$(tput setaf 2) # Bold Green
+bldblu=${txtbld}$(tput setaf 4) # Bold Blue
+bldylw=${txtbld}$(tput setaf 3) # Bold Yellow
+bldvlt=${txtbld}$(tput setaf 5) # Bold Violet
+bldcya=${txtbld}$(tput setaf 6) # Bold Cyan
+bldwht=${txtbld}$(tput setaf 7) # Bold White
+
+clear
+
+current_ver=$1
+
+echo "${bldred}██████╗ ██╗   ██╗ ██████╗██╗  ██╗███████╗████████╗██╗     ██╗███████╗████████╗     █████╗ ██████╗ ██╗"
+echo "${bldred}██╔══██╗██║   ██║██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██║     ██║██╔════╝╚══██╔══╝    ██╔══██╗██╔══██╗██║"
+echo "${bldred}██████╔╝██║   ██║██║     █████╔╝ █████╗     ██║   ██║     ██║███████╗   ██║       ███████║██████╔╝██║"
+echo "${bldred}██╔══██╗██║   ██║██║     ██╔═██╗ ██╔══╝     ██║   ██║     ██║╚════██║   ██║       ██╔══██║██╔═══╝ ██║"
+echo "${bldred}██████╔╝╚██████╔╝╚██████╗██║  ██╗███████╗   ██║   ███████╗██║███████║   ██║       ██║  ██║██║     ██║"
+echo "${bldred}╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚══════╝   ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}║                                ${bldcya}CP2A - BucketList Application API${bldred}                                  ║"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}║                                        ${bldcya}R E S T f u l A P I${bldred}                                        ║"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"
+echo "${bldred}║                  ${bldcya}CP2A - BucketList Application API $version - by asce1062 ${bldblu}(andela.com)${bldred}                    ║"
+echo "${bldred}╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"
+echo 
+echo
+echo "Press Enter to continue"
+read enterKey
+
