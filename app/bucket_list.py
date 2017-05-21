@@ -231,70 +231,38 @@ class BucketItemAPI(Resource):
         self.reqparse.add_argument('done', default=False, type=bool)
         super(BucketItemAPI, self).__init__()
 
-    def get(self, bucketlist_id, item_id=None):
+    def get(self, bucketlist_id=None, item_id=None):
         """ Fetch all created items """
 
         if item_id:
             this_item = \
-                BucketItem.query.filter_by(item_id=item_id).first()
+                BucketItem.query.filter_by(
+                    bucket_id=bucketlist_id, item_id=item_id).first()
             return (marshal(this_item, bucket_item_fields), 200)
+
+        if bucketlist_id:
+            this_item = \
+                BucketItem.query.filter_by(bucket_id=bucketlist_id).all()
+            if not this_item:
+                return (
+                    {
+                        'error': 'No items found'
+                    }, 400
+                )
+            return (marshal(this_item, bucket_item_fields), 200)
+
         else:
-            self.reqparse = reqparse.RequestParser()
-            self.reqparse.add_argument(
-                'q',
-                type=str,
-                location='args'
-            )
-            self.reqparse.add_argument(
-                'limit',
-                type=int,
-                location='args',
-                default=20
-            )
-            self.reqparse.add_argument(
-                'page',
-                type=int,
-                location='args',
-                default=1)
-            args = self.reqparse.parse_args()
-            query = args['q']
-            limit = args['limit']
-            page = args['page']
-            if query:
-                items = \
-                    BucketItem.query.filter(
-                        BucketItem.item_name.like(
-                            '%' + query + '%')).paginate(page, limit, False)
-            else:
-                items = BucketItem.query.filter().paginate(page, limit, False)
+            items = BucketItem.query.filter().all()
             if not items:
                 return (
                     {
-                        'message': 'items not found'
+                        'error': 'No items found'
                     }, 400
                 )
-            if items.has_prev:
-                prev_page = request.url_root \
-                    + 'api/v1.0/bucketlists/items/' + '?page=' \
-                    + str(page - 1) + '&limit=' + str(limit)
-            else:
-                prev_page = 'None'
-            if items.has_next:
-                next_page = request.url_root \
-                    + 'api/v1.0/bucketlists/items/' + '?page=' \
-                    + str(page + 1) + '&limit=' + str(limit)
-            else:
-                next_page = 'None'
             return (
                 {
-                    'message':
-                    {
-                        'next_page': next_page,
-                        'prev_page': prev_page,
-                        'total_pages': items.pages
-                    },
                     'items': marshal(
-                        items.items,
+                        items,
                         bucket_item_fields
                     )
                 }, 200
@@ -312,7 +280,7 @@ class BucketItemAPI(Resource):
         if not bucketlist_exists:
             return (
                 {
-                    'error': 'Bucketlist_id {} does not exists'.format(bucketlist_id)
+                    'error': 'Bucketlist id {} does not exists'.format(bucketlist_id)
                 }, 400
             )
 
@@ -357,14 +325,14 @@ class BucketItemAPI(Resource):
 
                 return (
                     {
-                        'error': 'item_id does not exists'
+                        'error': 'item id does not exists'
                     }, 400
                 )
         else:
 
             return (
                 {
-                    'error': 'bucketlist_id does not exists'
+                    'error': 'bucketlist id does not exists'
                 }, 400
             )
 
@@ -379,7 +347,7 @@ class BucketItemAPI(Resource):
         if not (bucketlist_exists or item_exists):
             return (
                 {
-                    'error': 'bucketlist_id or item_id does not exists'
+                    'error': 'bucketlist id or item_id does not exists'
                 }, 400
             )
 
