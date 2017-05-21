@@ -239,7 +239,6 @@ class BucketItemAPI(Resource):
                 BucketItem.query.filter_by(
                     bucket_id=bucketlist_id, item_id=item_id).first()
             return (marshal(this_item, bucket_item_fields), 200)
-
         if bucketlist_id:
             this_item = \
                 BucketItem.query.filter_by(bucket_id=bucketlist_id).all()
@@ -250,7 +249,6 @@ class BucketItemAPI(Resource):
                     }, 400
                 )
             return (marshal(this_item, bucket_item_fields), 200)
-
         else:
             items = BucketItem.query.filter().all()
             if not items:
