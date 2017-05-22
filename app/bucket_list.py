@@ -200,7 +200,7 @@ class BucketListAPI(Resource):
         if not this_bucket_list:
             return (
                 {
-                    'error': 'bucketlist with id {} does not exists'.format(id)
+                    'error': 'bucketlist with id {} does not exist'.format(id)
                 }, 400
             )
 
