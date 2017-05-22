@@ -105,7 +105,7 @@ class BucketListAPI(Resource):
                 return (
                     {
                         'message': 'Bucketlist not found'
-                    }, 400
+                    }, 404
                 )
             if bucketlists.has_prev:
                 prev_page = request.url_root + 'api/v1.0/bucketlists/' \
@@ -171,7 +171,7 @@ class BucketListAPI(Resource):
         if not this_bucket_list:
             return (
                 {
-                    'error': 'bucketlist with id {} does not exists'.format(id)
+                    'error': 'bucketlist with id {} does not exist'.format(id)
                 }, 400
             )
         args = self.reqparse.parse_args()

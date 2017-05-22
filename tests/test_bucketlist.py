@@ -24,7 +24,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn('No bucketlist name provided', str(data['message']))
 
     def test_create_bucketlist_duplicate(self):
-        """ Test user cannot create an existing bucketlist """
+        """ Test create bucketlist user cannot create an existing bucketlist """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -37,7 +37,7 @@ class BucketListTestCase(BaseTestCase):
                         == 'bucketlist_name Watch Anime already exists')
 
     def test_create_bucketlist(self):
-        """ Test user can create bucketlist """
+        """ Test create bucketlist user can create bucketlist """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -49,7 +49,7 @@ class BucketListTestCase(BaseTestCase):
                         == 'New bucketlist created successfully')
 
     def test_get_bucketlist(self):
-        """ Test user can get bucketlist """
+        """ Test create bucketlist user can get bucketlist """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -60,7 +60,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn('Watch Anime', str(data['bucketlists']))
 
     def test_get_bucketlist_by_id(self):
-        """ Test user can get bucketlist by bucketlist ID """
+        """ Test create bucketlist user can get bucketlist by bucketlist ID """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -71,7 +71,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn(str(data['bucket_name']), 'Watch Anime')
 
     def test_get_bucketlist_by_query(self):
-        """ Test user can get bucketlist by query """
+        """ Test create bucketlist user can get bucketlist by query """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -84,7 +84,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn('Watch Anime', str(data['bucketlists']))
 
     def test_get_bucketlist_limit_results(self):
-        """ Test user can limit bucketlists output"""
+        """ Test create bucketlist user can limit bucketlists output"""
 
         data_1 = {
             'bucketlist_name': 'Watch Anime'
@@ -102,7 +102,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn('2', str(data['message']))
 
     def test_get_bucketlist_limit_results_has_previous_page(self):
-        """ Test user can navigate through pages on limited output """
+        """ Test create bucketlist user can navigate through pages on limited output """
 
         data_1 = {
             'bucketlist_name': 'Watch Anime'
@@ -120,7 +120,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn('2', str(data['message']))
 
     def test_update_bucketlist(self):
-        """ Test user can update bucketlist """
+        """ Test create bucketlist user can update bucketlist """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -135,7 +135,7 @@ class BucketListTestCase(BaseTestCase):
         self.assertIn('Update was successfull', str(data['message']))
 
     def test_update_bucketlist_non_existant(self):
-        """ Test user cannot update a non existant bucketlist """
+        """ Test create bucketlist user cannot update a non existant bucketlist """
 
         edit_data = {
             'bucketlist_name': 'Watch Animee'
@@ -147,7 +147,7 @@ class BucketListTestCase(BaseTestCase):
                       'bucketlist with id 1 does not exists')
 
     def test_delete_bucketlist(self):
-        """ Test user can delete bucketlist """
+        """ Test create bucketlist user can delete bucketlist """
 
         data = {
             'bucketlist_name': 'Watch Anime'
@@ -160,7 +160,7 @@ class BucketListTestCase(BaseTestCase):
                       'bucketlist with id 1 has been deleted')
 
     def test_delete_bucketlist_non_existant(self):
-        """ Test user cannot delete a non existant bucketlist """
+        """ Test create bucketlist user cannot delete a non existant bucketlist """
 
         data = {
             'bucketlist_name': 'Watch Anime'
