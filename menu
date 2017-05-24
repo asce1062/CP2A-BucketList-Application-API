@@ -167,6 +167,8 @@ while :; do
 				tput setaf 2
 				clear
 				time nosetests -v
+				echo "${bldred}Press Enter to continue"
+				read enterKey
 				continue
 				;;
 			00)
@@ -179,6 +181,8 @@ while :; do
 				tput setaf 2
 				clear
 				time nosetests -v --with-coverage --cover-erase
+				echo "${bldred}Press Enter to continue"
+				read enterKey
 				continue
 				;;
 			99)
@@ -191,6 +195,8 @@ while :; do
 				tput setaf 2
 				clear
 				time nosetests -v --with-coverage --cover-erase --cover-html
+				echo "${bldred}Press Enter to continue"
+				read enterKey
 				continue
 				;;
 			u)

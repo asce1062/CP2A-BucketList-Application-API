@@ -13,6 +13,10 @@ from passlib.apps import custom_app_context as pwd_context
 
 # A module that implements various functions to deal with unstrusted
 # sources. Mainly useful for web applications.
+# TimedJSONWebSignatureSerializer: Implement JWS but also record time of signature signing.
+# This will help in cases of expired signatures.
+# BadSignature: Raise error if signature does not match.
+# SignatureExpired: Catch signature timestamps that are older than required max_age. 
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, \
     BadSignature, SignatureExpired

@@ -17,8 +17,22 @@ db = SQLAlchemy()
 # wraps the creation of a new Flask object
 
 def create_app(config_name):
+    """create_app
+
+    :param config_name:
+    """
+    # load configuration variables from an instance folder
+
     app = FlaskAPI(__name__, instance_relative_config=True)
+
+    # Updates values from a given object. Object can be a string
+    # or an actual object reference.
+
     app.config.from_object(app_config[config_name])
+
+    # Update the config from a python file.
+    # load the specified file from the instance/ directory.
+
     app.config.from_pyfile('config.py')
 
     from app.user import user_blueprint
@@ -26,7 +40,9 @@ def create_app(config_name):
 
     from app.bucket_list import blueprint
     app.register_blueprint(blueprint)
+
     # connect to the db
+    # Initialize the app for use with this database instance.
 
     db.init_app(app)
 

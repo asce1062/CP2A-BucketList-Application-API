@@ -36,7 +36,16 @@ class LoginAPI(Resource):
     """ Create endpoints for LoginAPI """
 
     def __init__(self):
+
+        # RequestParser: Enables adding and parsing of multiple arguments
+        # in the context of a single request.
+
         self.reqparse = reqparse.RequestParser()
+
+        # add_argument : Adds an argument to be parsed.
+        # Accepts either a single instance of Argument or
+        # arguments to be passed.
+
         self.reqparse.add_argument(
             'email',
             type=str,
@@ -53,7 +62,8 @@ class LoginAPI(Resource):
 
     def post(self):
         """ Login a user """
-
+        # parse_args : Parse all argumensts from the provided request
+        # and return a result as a namespace.
         args = self.reqparse.parse_args()
 
         # Fetch the user data

@@ -1,7 +1,28 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# Blueprint : Keep a record of functions that will be called with a class.
+# g: Acts as a local proxy. Forwards all operations to a proxied object.
+
 from flask import Blueprint, Flask, g, request
+
+# flask_httpauth : Provided basic HTTP authentication for Flask routes.
+# class HTTPTokenAuth(scheme='Token', realm=None)
+
 from flask_httpauth import HTTPTokenAuth
+
+# Api:  Main entry point of our application initialized with a Flask application.
+# app = Flask(__name__)
+# app = restful.Api(app)
+# Alternatively, :meth: init_app to set the Flask application after it has been constructed.
+# Resource: Represents an abstract RESTFul resource. Extend methods from this class
+# And expose methods for each supported HTTP method.
+# :meth: ~flask_restful.add_resource
+# marshal: Takes row data (int the form of dict, list, object) and a dict of fields
+# to output and filters the data based on those fields.
+# :param data: actual objects from which the fields are taken from
+# :param fields: a dict of whose keys will make up the final serialized response output.
+
 from flask_restful import Api, Resource, fields, marshal, reqparse
 
 from app import create_app, db
@@ -10,8 +31,11 @@ from app.models import BucketItem, Bucketlist, Users
 blueprint = Blueprint('bucket_list', __name__)
 api = Api(blueprint)
 
+# Set our scheme to Token
+
 auth_user = HTTPTokenAuth(scheme='Token')
 
+# Pass auth_user as an argument to the verify_token method
 
 @auth_user.verify_token
 def verify_token(token):
@@ -23,6 +47,7 @@ def verify_token(token):
     g.user = user
     return True
 
+# Define our :param fields: to use with marshal.
 
 bucket_item_fields = {
     'item_id': fields.Integer,
@@ -107,6 +132,8 @@ class BucketListAPI(Resource):
                         'message': 'Bucketlist not found'
                     }, 404
                 )
+            # .has_prev and .has_next are attributes of the Pagination instance.
+
             if bucketlists.has_prev:
                 prev_page = request.url_root + 'api/v1.0/bucketlists/' \
                     + '?page=' + str(page - 1) + '&limit=' + str(limit)
@@ -358,6 +385,10 @@ class BucketItemAPI(Resource):
             }, 202
         )
 
+# add_resource: Add a resource to the Api.
+# :param resource: class name of our resource.
+# :param urls: one or more url routes to match for the resource.
+# :param endpoint: reference our routes.
 
 api.add_resource(BucketListAPI, '/api/v1.0/bucketlists/<int:id>/',
                  '/api/v1.0/bucketlists/', endpoint='bucketlists')
