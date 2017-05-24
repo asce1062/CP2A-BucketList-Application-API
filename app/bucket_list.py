@@ -119,7 +119,7 @@ class BucketListAPI(Resource):
             if query:
                 bucketlists = \
                     Bucketlist.query.filter(
-                        Bucketlist.bucket_name.like(
+                        Bucketlist.bucket_name.ilike(
                             '%' + query + '%'),
                         Bucketlist.created_by == g.user.user_id).paginate(page, limit, False)
             else:
@@ -199,7 +199,7 @@ class BucketListAPI(Resource):
             return (
                 {
                     'error': 'bucketlist with id {} does not exist'.format(id)
-                }, 400
+                }, 404
             )
         args = self.reqparse.parse_args()
         name = args['bucketlist_name']
@@ -216,7 +216,7 @@ class BucketListAPI(Resource):
                     update_bucketlist,
                     bucket_item_fields
                 )
-            }, 201
+            }, 200
         )
 
     def delete(self, id):
@@ -228,7 +228,7 @@ class BucketListAPI(Resource):
             return (
                 {
                     'error': 'bucketlist with id {} does not exist'.format(id)
-                }, 400
+                }, 404
             )
 
         db.session.delete(this_bucket_list)
@@ -237,7 +237,7 @@ class BucketListAPI(Resource):
         return (
             {
                 'message': 'bucketlist with id {} has been deleted'.format(id)
-            }, 202
+            }, 200
         )
 
 
@@ -345,7 +345,7 @@ class BucketItemAPI(Resource):
 
                 db.session.commit()
 
-                return marshal(item_exists, bucket_item_fields)
+                return marshal(item_exists, bucket_item_fields), 200
             else:
 
                 return (
