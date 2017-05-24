@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/726e0fe0d085430286031c4649510649)](https://www.codacy.com/app/asce1062/CP2A-BucketList-Application-API?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=asce1062/CP2A-BucketList-Application-API&amp;utm_campaign=Badge_Grade) [![wercker status](https://app.wercker.com/status/3b89611314c4dd8ed7789393299aa8d9/s/ "wercker status")](https://app.wercker.com/project/byKey/3b89611314c4dd8ed7789393299aa8d9)
+
 # CP2A - BucketList Application API
 
 ### Requirements
