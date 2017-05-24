@@ -1,5 +1,7 @@
 # CP2A - BucketList Application API
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/726e0fe0d085430286031c4649510649)](https://www.codacy.com/app/asce1062/CP2A-BucketList-Application-API?utm_source=github.com&utm_medium=referral&utm_content=asce1062/CP2A-BucketList-Application-API&utm_campaign=badger)
+
 ### Requirements
 
 To complete this checkpoint you must have completed Modules 5, 6 and 7.
