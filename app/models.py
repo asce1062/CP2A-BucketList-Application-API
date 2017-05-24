@@ -5,7 +5,6 @@ import datetime
 import os
 
 # Add basic SQLAlchemy support to our app.
-from flask_sqlalchemy import SQLAlchemy
 
 # Suit for password hashing and generation routines.
 
@@ -16,7 +15,7 @@ from passlib.apps import custom_app_context as pwd_context
 # TimedJSONWebSignatureSerializer: Implement JWS but also record time of signature signing.
 # This will help in cases of expired signatures.
 # BadSignature: Raise error if signature does not match.
-# SignatureExpired: Catch signature timestamps that are older than required max_age. 
+# SignatureExpired: Catch signature timestamps that are older than required max_age.
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, \
     BadSignature, SignatureExpired

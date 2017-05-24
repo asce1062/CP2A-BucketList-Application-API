@@ -4,7 +4,7 @@
 # Blueprint : Keep a record of functions that will be called with a class.
 # g: Acts as a local proxy. Forwards all operations to a proxied object.
 
-from flask import Blueprint, Flask, g, request
+from flask import Blueprint, g, request
 
 # flask_httpauth : Provided basic HTTP authentication for Flask routes.
 # class HTTPTokenAuth(scheme='Token', realm=None)
@@ -25,7 +25,7 @@ from flask_httpauth import HTTPTokenAuth
 
 from flask_restful import Api, Resource, fields, marshal, reqparse
 
-from app import create_app, db
+from app import db
 from app.models import BucketItem, Bucketlist, Users
 
 blueprint = Blueprint('bucket_list', __name__)
@@ -36,6 +36,7 @@ api = Api(blueprint)
 auth_user = HTTPTokenAuth(scheme='Token')
 
 # Pass auth_user as an argument to the verify_token method
+
 
 @auth_user.verify_token
 def verify_token(token):
@@ -48,6 +49,7 @@ def verify_token(token):
     return True
 
 # Define our :param fields: to use with marshal.
+
 
 bucket_item_fields = {
     'item_id': fields.Integer,
@@ -389,6 +391,7 @@ class BucketItemAPI(Resource):
 # :param resource: class name of our resource.
 # :param urls: one or more url routes to match for the resource.
 # :param endpoint: reference our routes.
+
 
 api.add_resource(BucketListAPI, '/api/v1.0/bucketlists/<int:id>/',
                  '/api/v1.0/bucketlists/', endpoint='bucketlists')

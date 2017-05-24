@@ -11,14 +11,11 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
 from app import db, create_app
-from app import models
 
 app = create_app(config_name=os.getenv('APP_SETTINGS'))
 
 # Bind our application to the current context.
 
-with app.app_context():
-    from app.models import Users, BucketItem, Bucketlist
 migrate = Migrate(app, db)
 manager = Manager(app)
 
@@ -41,6 +38,7 @@ def drop_db():
 
     os.system('dropdb test_db')
     os.system('dropdb flask_api')
+
 
 if __name__ == '__main__':
     manager.run()
