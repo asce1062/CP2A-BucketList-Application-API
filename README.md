@@ -289,18 +289,6 @@ Bucket lists with the string “bucket1” in their name.
 
 ```
 
-+ ##### Get Bucketlist Limit results:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
-    
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
-
-```
-
 + ##### Create bucketlist item:
 
 ```
