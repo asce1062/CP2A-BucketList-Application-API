@@ -137,3 +137,279 @@ Bucket lists with the string “bucket1” in their name.
 + Stretch your API to see how it performs for multiple requests using [Apache AB](https://www.digitalocean.com/community/tutorials/how-to-use-apachebench-to-do-load-testing-on-an-ubuntu-13-10-vps).
 + Build a mobile front-end for your application using Ionic.
 + Read more about best practices for API design.
+
+#
+
+#### GETTING STARTED:
+
+1. Clone Repo:
+
+    ```
+    $ git clone git@github.com:asce1062/CP2A-BucketList-Application-API.git
+    ```
+2. Navigate to local directory.
+
+    ```
+    $ cd CP2A-BucketList-Application-API
+    ```
+3. Install virtualenv via pip:
+
+    ```
+    $ pip install virtualenv
+    ```
+4. Install virtualenvwrapper via pip:
+
+    ```
+    $ pip install virtualenvwrapper
+    $ export WORKON_HOME=$HOME/.virtualenvs
+    $ export PROJECT_HOME=$HOME/Devel
+    $ source /usr/local/bin/virtualenvwrapper.sh
+    $ source ~/.bashrc
+    $ mkvirtualenv bucket
+    $ workon bucket
+    ```
+    
+5. Install Mac OS X Using Homebrew:
+
+    ```
+    $ brew install autoenv
+    $ echo "source $(brew --prefix autoenv)/activate.sh" >> ~/.zshrc
+    ```
+6. Run the menu script
+
+    ```
+    $ ./menu
+    ```
+7. Select options from the menu from 1 to 6. (Ohers are optional)
+
+    ![amityville](https://i.imgur.com/mvo36Xz.png)
+
+#
+
+#### USAGE:
+##### Video Showing the Usage (Using Postman):
+[![CP2A](http://img.youtube.com/vi/NA12RrHNGTg/0.jpg)](https://youtu.be/NA12RrHNGTg)
+
++ ##### Register:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/auth/register/
+    
+    :args:
+    'username': 'asce1062'
+    'first_name': 'Alex'
+    'last_name': 'Immer'
+    'email': 'tnkratos@gmail.com'
+    'password': 'onepiece'
+```
+
++ ##### Login:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/auth/login/
+    
+    :args:
+    'email': 'kratostn@gmail.com',
+    'password': 'onepiece'
+```
+
++ ##### Create Bucketlist:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+```
+
++ ##### Get Bucketlist:
+
+```
+    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/
+
+```
+
++ ##### Get Bucketlist by ID:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/1/
+
+```
+
++ ##### Update Bucketlist:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [PUT] http://127.0.0.1:5000/api/v1.0/bucketlists/1/
+
+```
+
++ ##### Delete Bucketlist:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [DELETE] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
+
+```
+
++ ##### Get Bucketlist by query:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?q=Watch Anime
+
+```
+
++ ##### Get Bucketlist Limit results:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
+
+```
+
++ ##### Get Bucketlist Limit results:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
+
+```
+
++ ##### Create bucketlist item:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
+
+    :args:
+    'item_name': 'One Piece'
+    'done': 'False'
+
+```
+
++ ##### Get bucketlist items for a specific bucketlist:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [GET] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
+
+```
+
++ ##### Get bucketlist item by id for a specific bucketlist:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [GET] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
+
+```
+
++ ##### Update bucketlist item:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
+
+    :args:
+    'item_name': 'One Piece'
+    'done': 'False'
+    
+    [PUT] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
+
+    :args:
+    'item_name': 'One Piece'
+    'done': 'True'
+
+```
+
++ ##### Delete bucketlist item:
+
+```
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    :args:
+    'bucketlist_name': 'Watch Anime'
+
+    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
+
+    :args:
+    'item_name': 'One Piece'
+    'done': 'False'
+    
+    [DELETE] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
