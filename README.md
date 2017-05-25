@@ -191,123 +191,123 @@ Bucket lists with the string “bucket1” in their name.
 [![CP2A](http://img.youtube.com/vi/NA12RrHNGTg/0.jpg)](https://youtu.be/NA12RrHNGTg)
 
 + ##### Register:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/auth/register/
-    
-    :args:
-    'username': 'asce1062'
-    'first_name': 'Alex'
-    'last_name': 'Immer'
-    'email': 'tnkratos@gmail.com'
-    'password': 'onepiece'
-```
+    ![register](https://i.imgur.com/EbIpVXZ.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/auth/register/
+        
+        :args:
+        'username': 'asce1062'
+        'first_name': 'Alex'
+        'last_name': 'Immer'
+        'email': 'tnkratos@gmail.com'
+        'password': 'onepiece'
+    ```
 
 + ##### Login:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/auth/login/
-    
-    :args:
-    'email': 'kratostn@gmail.com',
-    'password': 'onepiece'
-```
+    ![login](https://i.imgur.com/tuEWWdz.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/auth/login/
+        
+        :args:
+        'email': 'kratostn@gmail.com',
+        'password': 'onepiece'
+    ```
 
 + ##### Create Bucketlist:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
-    
-    :args:
-    'bucketlist_name': 'Watch Anime'
-```
+    ![create bucketlist](https://i.imgur.com/Znsqqxv.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
+    ```
 
 + ##### Get Bucketlist:
-
-```
-    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/
-
-```
+    ![get bucketlists](https://i.imgur.com/h7UtN9r.png)
+    ```
+        [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    
+    ```
 
 + ##### Get Bucketlist by ID:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![get bucketlist buy id](https://i.imgur.com/xh8M1Oh.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/1/
-
-```
+        [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/1/
+    
+    ```
 
 + ##### Update Bucketlist:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![update bucketlist](https://i.imgur.com/CjQmSVc.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [PUT] http://127.0.0.1:5000/api/v1.0/bucketlists/1/
-
-```
+        [PUT] http://127.0.0.1:5000/api/v1.0/bucketlists/1/
+    
+    ```
 
 + ##### Delete Bucketlist:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![delete bucketlist](https://i.imgur.com/JvOTJ6Z.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
+        [DELETE] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
 
-    [DELETE] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
-
-```
+    ```
 
 + ##### Get Bucketlist by query:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![query bucketlist](https://i.imgur.com/qeotLSH.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?q=Watch Anime
-
-```
+        [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?q=Watch Anime
+    
+    ```
 
 + ##### Get Bucketlist Limit results:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![limit results](https://i.imgur.com/AT0w2bk.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
-
-```
+        [Get] http://127.0.0.1:5000/api/v1.0/bucketlists/?limit=1
+    
+    ```
 
 + ##### Create bucketlist item:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![create bucketlist item](https://i.imgur.com/vNlcnEy.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
-
-    :args:
-    'item_name': 'One Piece'
-    'done': 'False'
-
-```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
+    
+        :args:
+        'item_name': 'One Piece'
+        'done': 'False'
+    
+    ```
 
 + ##### Get bucketlist items for a specific bucketlist:
-
-```
+    ![get items for an ID](https://i.imgur.com/xh8M1Oh.png)
+    ```
     [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
     
     :args:
@@ -315,11 +315,11 @@ Bucket lists with the string “bucket1” in their name.
 
     [GET] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
 
-```
+    ```
 
 + ##### Get bucketlist item by id for a specific bucketlist:
-
-```
+    ![get item by id](https://i.imgur.com/VjGhsyB.png)
+    ```
     [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
     
     :args:
@@ -327,47 +327,47 @@ Bucket lists with the string “bucket1” in their name.
 
     [GET] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
 
-```
+    ```
 
 + ##### Update bucketlist item:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![update bucketlist item](https://i.imgur.com/VjGhsyB.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
-
-    :args:
-    'item_name': 'One Piece'
-    'done': 'False'
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
     
-    [PUT] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
-
-    :args:
-    'item_name': 'One Piece'
-    'done': 'True'
-
-```
+        :args:
+        'item_name': 'One Piece'
+        'done': 'False'
+        
+        [PUT] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
+    
+        :args:
+        'item_name': 'One Piece'
+        'done': 'True'
+    
+    ```
 
 + ##### Delete bucketlist item:
-
-```
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+    ![delete bucketlist item](https://i.imgur.com/mXU31SP.png)
+    ```
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/
+        
+        :args:
+        'bucketlist_name': 'Watch Anime'
     
-    :args:
-    'bucketlist_name': 'Watch Anime'
-
-    [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
-
-    :args:
-    'item_name': 'One Piece'
-    'done': 'False'
+        [POST] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/
     
-    [DELETE] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
-
-```
+        :args:
+        'item_name': 'One Piece'
+        'done': 'False'
+        
+        [DELETE] http://127.0.0.1:5000/api/v1.0/bucketlists/1/items/1
+    
+    ```
 
 
 
