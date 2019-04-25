@@ -29,6 +29,7 @@ def create_app(config_name):
     # or an actual object reference.
 
     app.config.from_object(app_config[config_name])
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Update the config from a python file.
     # load the specified file from the instance/ directory.
