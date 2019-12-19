@@ -1,0 +1,87 @@
+############################################################################
+#
+# Copyright (c) 2017 - asce1062 (alex.mbugua@andela.com)
+#
+# This script file is intended for personal and/or educational use only.  
+# It may not be duplicated for monetary benefit or 
+# any other purpose without the permission of the developer.
+#
+############################################################################
+normal='tput sgr0'              # White
+red='tput setaf 1'              # Red
+green='tput setaf 2'            # Green
+yellow='tput setaf 3'           # Yellow
+blue='tput setaf 4'             # Blue
+violet='tput setaf 5'           # Violet
+cyan='tput setaf 6'             # Cyan
+white='tput setaf 7'            # White
+txtbld=$(tput bold)             # Bold
+bldred=${txtbld}$(tput setaf 1) # Bold Red
+bldgrn=${txtbld}$(tput setaf 2) # Bold Green
+bldblu=${txtbld}$(tput setaf 4) # Bold Blue
+bldylw=${txtbld}$(tput setaf 3) # Bold Yellow
+bldvlt=${txtbld}$(tput setaf 5) # Bold Violet
+bldcya=${txtbld}$(tput setaf 6) # Bold Cyan
+bldwht=${txtbld}$(tput setaf 7) # Bold White
+
+clear
+
+current_ver=$1
+
+echo "${bldred}██████╗ ██╗   ██╗ ██████╗██╗  ██╗███████╗████████╗██╗     ██╗███████╗████████╗     █████╗ ██████╗ ██╗"
+echo "${bldred}██╔══██╗██║   ██║██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝██║     ██║██╔════╝╚══██╔══╝    ██╔══██╗██╔══██╗██║"
+echo "${bldred}██████╔╝██║   ██║██║     █████╔╝ █████╗     ██║   ██║     ██║███████╗   ██║       ███████║██████╔╝██║"
+echo "${bldred}██╔══██╗██║   ██║██║     ██╔═██╗ ██╔══╝     ██║   ██║     ██║╚════██║   ██║       ██╔══██║██╔═══╝ ██║"
+echo "${bldred}██████╔╝╚██████╔╝╚██████╗██║  ██╗███████╗   ██║   ███████╗██║███████║   ██║       ██║  ██║██║     ██║"
+echo "${bldred}╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚══════╝   ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}║                               ${bldcya}CP2A - BucketList Application API${bldred}                                   ║"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}║                                      ${bldcya}R E S T f u l A P I${bldred}                                          ║"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}║                                                                                                   ║"
+echo "${bldred}╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"
+echo "${bldred}║                ${bldcya}CP2A - BucketList Application API $current_ver - by asce1062 ${bldblu}(andela.com)${bldred}                   ║"
+echo "${bldred}╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝"
+echo
+echo
+echo "${bldblu}                               CP2A - BucketList Application API                                     "
+echo "${bldwht}                               ---------------------------------                                     "
+echo
+echo
+echo
+echo
+echo "Problem Description"
+echo "-------------------"
+echo "According to Merriam-Webster Dictionary,"
+echo "a Bucket List is a list of things that one has not done before but wants to do before dying."
+echo "In this exercise you will be required to create an API for an online Bucket List service using Flask."
+echo "Specifications for the API are shown below. You may use any database you prefer for this assignment."
+echo
+echo
+echo "+-----------------------------------------------------------------------------+"
+echo "|                 EndPoint                 |           Functionality          |"
+echo "+------------------------------------------+----------------------------------+"
+echo "|${bldred}POST ${bldwht}/auth/login                          | Logs a user in                   |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}POST ${bldwht}/auth/register                       | Register a user                  |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}POST ${bldwht}/bucketlists/                        | Logs a user in                   |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}GET ${bldwht}/bucketlists/                         | List all the created bucket lists|"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}GET ${bldwht}/bucketlists/<id>                     | Get single bucket list           |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}PUT ${bldwht}/bucketlists/<id>                     | Update this bucket list          |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}DELETE ${bldwht}/bucketlists/<id>                  | Delete this single bucket list   |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}POST ${bldwht}/bucketlists/<id>/items/             | Create a new item in bucket list |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}PUT ${bldwht}/bucketlists/<id>/items/<item_id>     | Update a bucket list item        |"
+echo "+-----------------------------------------------------------------------------+"
+echo "|${bldred}DELETE ${bldwht}/bucketlists/<id>/items/<item_id>  | Delete an item in a bucket list  |"
+echo "+-----------------------------------------------------------------------------+"
+echo
+echo "${bldred}Press Enter to continue"
+read enterKey
